@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glinski.Utils", "Glinski.Ut
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glinski.Utils.Tests", "Glinski.Utils.Tests\Glinski.Utils.Tests.csproj", "{7F913DB0-5C27-4CBC-BB27-371A57633801}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glinski.Utils.Benchmarks", "Glinski.Utils.Benchmarks\Glinski.Utils.Benchmarks.csproj", "{6B8C9F4B-B48A-4F4E-A275-88C3818B39EC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7F913DB0-5C27-4CBC-BB27-371A57633801}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F913DB0-5C27-4CBC-BB27-371A57633801}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F913DB0-5C27-4CBC-BB27-371A57633801}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B8C9F4B-B48A-4F4E-A275-88C3818B39EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B8C9F4B-B48A-4F4E-A275-88C3818B39EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B8C9F4B-B48A-4F4E-A275-88C3818B39EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B8C9F4B-B48A-4F4E-A275-88C3818B39EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

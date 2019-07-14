@@ -8,7 +8,7 @@ namespace Glinki.Utils.Tests
     public class MathTests
     {
         [Theory]
-        [InlineData(20, 15, 5)]
+        [InlineData(20, 15, 0)]
         [InlineData(15, 20, 5)]
         [InlineData(5, 5, 5)]
         [InlineData(1, 3, 1)]
