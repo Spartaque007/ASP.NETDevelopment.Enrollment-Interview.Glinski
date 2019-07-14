@@ -8,20 +8,26 @@ namespace Glinki.Utils.Tests
     public class MathTests
     {
         [Theory]
-        [InlineData(20, 15, 3)]
+        [InlineData(20, -15, 5)]
         [InlineData(15, 20, 5)]
         [InlineData(5, 5, 5)]
         [InlineData(1, 3, 1)]
         [InlineData(100, 100, 100)]
-        public void GetGCD_Test(int x, int y, int expect)
+        public void GetGCD_Euclidean_Test(int x, int y, int expect)
         {
-            int a =Math.GetGCD(x, y);
+            long a = Math.GetGCDEuclidean(x, y);
             Assert.Equal(expect, a);
         }
-        [Fact]
-        public void GetGCD_Test_ExpectedException()
+        [Theory]
+        [InlineData(20, -15, 5)]
+        [InlineData(15, 20, 5)]
+        [InlineData(5, 5, 5)]
+        [InlineData(1, 3, 1)]
+        [InlineData(100, 100, 100)]
+        public void GetGCD_Test2(long x, long y, long expect)
         {
-            Exception ex = Assert.Throws<ArgumentException>(() => Math.GetGCD(0, 5));
+            long a = Math. GetGCDBinary(x, y);
+            Assert.Equal(expect, a);
         }
     }
 }
