@@ -1,5 +1,4 @@
 ﻿using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Configs;
 using Gliski.Utils;
 using System.Numerics;
 
@@ -7,12 +6,10 @@ namespace Glinski.Utils.Benchmarks
 {
     public class GCDBenchmark
     {
-
-
         [Params(int.MaxValue - 100, uint.MaxValue, long.MaxValue)]
         public long A { get; set; }
 
-        [Params(int.MaxValue-100, uint.MaxValue, long.MaxValue)]
+        [Params(int.MaxValue - 100, uint.MaxValue, long.MaxValue)]
         public long B { get; set; }
 
         [Benchmark]
@@ -27,6 +24,4 @@ namespace Glinski.Utils.Benchmarks
         [Benchmark]
         public BigInteger BigIntegerEuclidean() => Math.GetGCDEuclidean(A, B);
     }
-
-
 }

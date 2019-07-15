@@ -37,7 +37,7 @@ namespace Gliski.Utils
                 }
                 else
                 {
-                    number2  %= number1;
+                    number2 %= number1;
                 }
             }
             return number1 + number2;
@@ -48,10 +48,12 @@ namespace Gliski.Utils
             {
                 number1 *= -1;
             }
+
             if (number2 < 0)
             {
                 number2 *= -1;
             }
+
             if (number1 == 0)
             {
                 return number2;
@@ -71,7 +73,7 @@ namespace Gliski.Utils
             {
                 if (number1 > number2)
                 {
-                    number1%= number2;
+                    number1 %= number2;
                 }
                 else
                 {
@@ -80,17 +82,20 @@ namespace Gliski.Utils
             }
             return number1 + number2;
         }
+
         public static long GetGCDBinary(long number1, long number2)
         {
             if (number1 < 0)
             {
                 number1 *= -1;
             }
+
             if (number2 < 0)
             {
                 number2 *= -1;
             }
-            if (number1==number2)
+
+            if (number1 == number2)
             {
                 return number1;
             }
@@ -121,7 +126,6 @@ namespace Gliski.Utils
             number1 = number1 > number2 ? number1 - number2 : number2 - number1;
             return k * number1 / 2;
         }
-
     }
 }
 

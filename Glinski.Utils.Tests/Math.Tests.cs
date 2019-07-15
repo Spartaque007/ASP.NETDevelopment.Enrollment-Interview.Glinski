@@ -1,6 +1,4 @@
-﻿using Gliski.Utils;
-using System;
-using Xunit;
+﻿using Xunit;
 using Math = Gliski.Utils.Math;
 
 namespace Glinki.Utils.Tests
@@ -18,6 +16,7 @@ namespace Glinki.Utils.Tests
             long a = Math.GetGCDEuclidean(x, y);
             Assert.Equal(expect, a);
         }
+
         [Theory]
         [InlineData(20, -15, 5)]
         [InlineData(15, 20, 5)]
@@ -26,7 +25,7 @@ namespace Glinki.Utils.Tests
         [InlineData(100, 100, 100)]
         public void GetGCD_Test2(long x, long y, long expect)
         {
-            long a = Math. GetGCDBinary(x, y);
+            long a = Math.GetGCDBinary(x, y);
             Assert.Equal(expect, a);
         }
     }

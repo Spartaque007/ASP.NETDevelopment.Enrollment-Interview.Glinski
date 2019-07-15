@@ -1,7 +1,4 @@
-﻿using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Running;
-using Gliski.Utils;
-using System.Numerics;
+﻿using BenchmarkDotNet.Running;
 
 namespace Glinski.Utils.Benchmarks
 {
@@ -9,7 +6,6 @@ namespace Glinski.Utils.Benchmarks
     {
         static void Main()
         {
-            
             var summary = BenchmarkRunner.Run<GCDBenchmark>();
         }
     }

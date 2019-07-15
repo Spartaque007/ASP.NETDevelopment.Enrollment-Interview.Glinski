@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="Math.Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StringCounter.Tests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
