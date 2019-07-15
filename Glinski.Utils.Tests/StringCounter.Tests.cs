@@ -37,6 +37,21 @@ namespace Glinki.Utils.Tests
         {
             string[] arrayIn = new string[] { "666666", null};
             Assert.Throws<NullReferenceException>(()=>StringCouter.OrderStringsByLengthBubble(arrayIn));
+            Assert.Throws<NullReferenceException>(()=>StringCouter.OrderStringsByLengthBubble(arrayIn));
+        }
+
+        
+        [Theory]
+        [InlineData
+            (new string[] { "666666", "55555", "4444", "333", "22", "1" },
+            new string[] { "1", "22", "333", "4444", "55555", "666666" })]
+        [InlineData
+            (new string[] { "1" },
+            new string[] { "1" })]
+        public void OrderStringsByLengthMerge_Test(string[] arrayIN, string[] arrayExpect)
+        {
+            string[] arrayAfterSort = StringCouter.OrderStringsByLengthMerge(arrayIN);
+            Assert.Equal(arrayExpect, arrayAfterSort);
         }
     }
 }

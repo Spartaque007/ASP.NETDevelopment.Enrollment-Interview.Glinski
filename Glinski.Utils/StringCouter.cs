@@ -34,7 +34,7 @@ namespace Gliski.Utils
 
             for (int i = 1; i < array.Length; i++)
             {
-                if (array[i]==null)
+                if (array[i] == null)
                 {
                     throw new NullReferenceException($"{i} element of the array is null");
                 }
@@ -52,5 +52,69 @@ namespace Gliski.Utils
             }
             return array;
         }
+
+        public static string[] OrderStringsByLengthMerge(string[] array)
+        {
+            if (array.Length < 2)
+            {
+                return array;
+            }
+            else
+            {
+                int arrayLeftLength = array.Length / 2;
+                int arrayRightLength = array.Length - arrayLeftLength;
+                string[] arrayLeft = new string[arrayLeftLength];
+                string[] arrayRight = new string[arrayRightLength];
+                Array.Copy(array, 0, arrayLeft, 0, arrayLeftLength);
+                Array.Copy(array, arrayLeftLength, arrayRight, 0, arrayRightLength);
+                arrayLeft = OrderStringsByLengthMerge(arrayLeft);
+                arrayRight = OrderStringsByLengthMerge(arrayRight);
+                return MergeArrays(arrayLeft, arrayRight);
+            }
+        }
+        private static string[] MergeArrays(string[] leftArray, string[] rightArray)
+        {
+            int arraySize = leftArray.Length + rightArray.Length;
+            string[] mergingArray = new string[arraySize];
+            int indexLeft = 0;
+            int indexRight = 0;
+            for (int i = 0; i < arraySize; i++)
+            {
+                if (leftArray.Length == indexLeft)
+                {
+                    mergingArray[i] = rightArray[indexRight];
+                    indexRight++;
+                    continue;
+                }
+
+                if (rightArray.Length == indexRight)
+                {
+                    mergingArray[i] = leftArray[indexLeft];
+                    indexLeft++;
+                    continue;
+                }
+
+                if (leftArray[indexLeft].Length < rightArray[indexRight].Length)
+                {
+                    mergingArray[i] = leftArray[indexLeft];
+                    indexLeft++;
+                }
+                else if (leftArray[indexLeft].Length > rightArray[indexRight].Length)
+                {
+                    mergingArray[i] = rightArray[indexRight];
+                    indexRight++;
+                }
+                else if (leftArray[indexLeft].Length == rightArray[indexRight].Length)
+                {
+                    mergingArray[i] = leftArray[indexLeft];
+                    mergingArray[i + 1] = rightArray[indexRight];
+                    indexLeft++;
+                    indexRight++;
+                    i++;
+                }
+            }
+            return mergingArray;
+        }
     }
 }
+
