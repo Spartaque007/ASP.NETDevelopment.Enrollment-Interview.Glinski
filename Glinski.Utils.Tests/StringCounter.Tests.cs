@@ -1,5 +1,6 @@
 ﻿using Xunit;
 using Gliski.Utils;
+using System;
 
 namespace Glinki.Utils.Tests
 {
@@ -16,6 +17,26 @@ namespace Glinki.Utils.Tests
         {
             int a = StringCouter.CountOfVowels(text);
             Assert.Equal(expect, a);
+        }
+
+        [Theory]
+        [InlineData
+            (new string[] { "666666", "55555", "4444", "333", "22","1" },
+            new string[] { "1", "22","333", "4444", "55555", "666666" })]
+        [InlineData
+            (new string[] { "1" },
+            new string[] { "1" })]
+        public void OrderStringsByLengthBubble_Test(string[] arrayIN, string[] arrayExpect)
+        {
+            string[] arrayAfterSort = StringCouter.OrderStringsByLengthBubble(arrayIN);
+            Assert.Equal(arrayExpect, arrayAfterSort);
+        }
+
+        [Fact]
+        public void OrderStringsByLengthBubble_ExceptionTest()
+        {
+            string[] arrayIn = new string[] { "666666", null};
+            Assert.Throws<NullReferenceException>(()=>StringCouter.OrderStringsByLengthBubble(arrayIn));
         }
     }
 }

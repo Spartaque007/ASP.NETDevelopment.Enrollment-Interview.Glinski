@@ -24,5 +24,33 @@ namespace Gliski.Utils
             }
             return counter;
         }
+
+        public static string[] OrderStringsByLengthBubble(string[] array)
+        {
+            if (array.Length < 2)
+            {
+                return array;
+            }
+
+            for (int i = 1; i < array.Length; i++)
+            {
+                if (array[i]==null)
+                {
+                    throw new NullReferenceException($"{i} element of the array is null");
+                }
+                if (array[i].Length < array[i - 1].Length)
+                {
+                    int k = i;
+                    while (k > 0 && array[k].Length < array[k - 1].Length)
+                    {
+                        string tmp = array[k];
+                        array[k] = array[k - 1];
+                        array[k - 1] = tmp;
+                        k--;
+                    }
+                }
+            }
+            return array;
+        }
     }
 }
