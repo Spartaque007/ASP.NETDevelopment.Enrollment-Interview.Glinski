@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Gliski.Utils
 {
@@ -8,13 +10,13 @@ namespace Gliski.Utils
         {
             Char[] letters = new char[] { 'a', 'e', 'i', 'o', 'u' };
             int counter = 0;
+
             for (int i = 0; i < text.Length; i++)
             {
                 if (Char.IsLetter(text[i]))
                 {
                     for (int j = 0; j < letters.Length; j++)
                     {
-
                         if (text[i].Equals(letters[j]))
                         {
                             counter++;
@@ -22,10 +24,16 @@ namespace Gliski.Utils
                     }
                 }
             }
+
             return counter;
         }
 
         public static string[] OrderStringsByLengthBubble(string[] array)
+        {
+            return BubbleSort(array, new StringLengthComparator());
+
+        }
+        public static string[] BubbleSort(string[] array, IComparer<string> comparer)
         {
             if (array.Length < 2)
             {
@@ -34,14 +42,11 @@ namespace Gliski.Utils
 
             for (int i = 1; i < array.Length; i++)
             {
-                if (array[i] == null)
-                {
-                    throw new NullReferenceException($"{i} element of the array is null");
-                }
-                if (array[i].Length < array[i - 1].Length)
+                int a = comparer.Compare(array[i], array[i - 1]);
+                if (a < 0)
                 {
                     int k = i;
-                    while (k > 0 && array[k].Length < array[k - 1].Length)
+                    while (k > 0 && comparer.Compare(array[k], array[k - 1]) < 0)
                     {
                         string tmp = array[k];
                         array[k] = array[k - 1];
@@ -54,6 +59,12 @@ namespace Gliski.Utils
         }
 
         public static string[] OrderStringsByLengthMerge(string[] array)
+        {
+            return MergeSort(array, new StringLengthComparator());
+
+        }
+
+        public static string[] MergeSort(string[] array, IComparer<string> comparer)
         {
             if (array.Length < 2)
             {
@@ -69,15 +80,16 @@ namespace Gliski.Utils
                 Array.Copy(array, arrayLeftLength, arrayRight, 0, arrayRightLength);
                 arrayLeft = OrderStringsByLengthMerge(arrayLeft);
                 arrayRight = OrderStringsByLengthMerge(arrayRight);
-                return MergeArrays(arrayLeft, arrayRight);
+                return MergeArrays(arrayLeft, arrayRight, comparer);
             }
         }
-        private static string[] MergeArrays(string[] leftArray, string[] rightArray)
+        private static string[] MergeArrays(string[] leftArray, string[] rightArray, IComparer<string> comparer)
         {
             int arraySize = leftArray.Length + rightArray.Length;
             string[] mergingArray = new string[arraySize];
             int indexLeft = 0;
             int indexRight = 0;
+
             for (int i = 0; i < arraySize; i++)
             {
                 if (leftArray.Length == indexLeft)
@@ -94,17 +106,17 @@ namespace Gliski.Utils
                     continue;
                 }
 
-                if (leftArray[indexLeft].Length < rightArray[indexRight].Length)
+                if (comparer.Compare(leftArray[indexLeft], rightArray[indexRight])<0)
                 {
                     mergingArray[i] = leftArray[indexLeft];
                     indexLeft++;
                 }
-                else if (leftArray[indexLeft].Length > rightArray[indexRight].Length)
+                else if (comparer.Compare(leftArray[indexLeft], rightArray[indexRight]) > 0)
                 {
                     mergingArray[i] = rightArray[indexRight];
                     indexRight++;
                 }
-                else if (leftArray[indexLeft].Length == rightArray[indexRight].Length)
+                else if (comparer.Compare(leftArray[indexLeft], rightArray[indexRight]) == 0)
                 {
                     mergingArray[i] = leftArray[indexLeft];
                     mergingArray[i + 1] = rightArray[indexRight];
@@ -112,7 +124,9 @@ namespace Gliski.Utils
                     indexRight++;
                     i++;
                 }
+
             }
+
             return mergingArray;
         }
     }

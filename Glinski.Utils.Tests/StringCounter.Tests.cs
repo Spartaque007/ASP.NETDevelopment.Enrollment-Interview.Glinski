@@ -1,11 +1,13 @@
 ﻿using Xunit;
 using Gliski.Utils;
 using System;
+using System.Collections;
 
 namespace Glinki.Utils.Tests
 {
     public class StringCounterTest
     {
+        
         [Theory]
         [InlineData("eeee", 4)]
         [InlineData("a e i  v hv hj kll e/?\n", 4)]
@@ -24,6 +26,9 @@ namespace Glinki.Utils.Tests
             (new string[] { "666666", "55555", "4444", "333", "22","1" },
             new string[] { "1", "22","333", "4444", "55555", "666666" })]
         [InlineData
+            (new string[] { null, null, "4444", "333", "22", "1" },
+            new string[] { "1", "22", "333", "4444", null, null })]
+        [InlineData
             (new string[] { "1" },
             new string[] { "1" })]
         public void OrderStringsByLengthBubble_Test(string[] arrayIN, string[] arrayExpect)
@@ -32,15 +37,7 @@ namespace Glinki.Utils.Tests
             Assert.Equal(arrayExpect, arrayAfterSort);
         }
 
-        [Fact]
-        public void OrderStringsByLengthBubble_ExceptionTest()
-        {
-            string[] arrayIn = new string[] { "666666", null};
-            Assert.Throws<NullReferenceException>(()=>StringCouter.OrderStringsByLengthBubble(arrayIn));
-            Assert.Throws<NullReferenceException>(()=>StringCouter.OrderStringsByLengthBubble(arrayIn));
-        }
-
-        
+               
         [Theory]
         [InlineData
             (new string[] { "666666", "55555", "4444", "333", "22", "1" },
