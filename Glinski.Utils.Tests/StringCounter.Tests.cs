@@ -11,6 +11,7 @@ namespace Glinki.Utils.Tests
         [InlineData("", 0)]
         [InlineData("ghjlkjрлпорало", 0)]
         [InlineData("aeiou", 5)]
+        [InlineData("aeiou aeiou aeiou", 15)]
         public void CountOfVowels_Test(string text, int expect)
         {
             int a = StringCouter.CountOfVowels(text);
