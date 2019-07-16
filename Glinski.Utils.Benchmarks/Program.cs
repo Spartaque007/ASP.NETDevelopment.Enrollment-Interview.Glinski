@@ -6,7 +6,8 @@ namespace Glinski.Utils.Benchmarks
     {
         static void Main()
         {
-            var summary = BenchmarkRunner.Run<GCDBenchmark>();
+            var summary = BenchmarkRunner.Run<RemoveWordDuplicatesBenchmark>();
+            
         }
     }
 }

@@ -55,6 +55,7 @@ namespace Glinki.Utils.Tests
             Assert.Equal(arrayExpect, arrayAfterSort);
         }
 
+
         [Theory]
         [InlineData("aaa aaa bb b uuuu bb", "aaa  bb b uuuu ")]
         [InlineData("", "")]
@@ -67,10 +68,8 @@ namespace Glinki.Utils.Tests
 
         public void RemoveDuplicateWords_Test(string text, string expectedText)
         {
-            string stringAfterRemove = StringCouter.RemoveDuplicateWords(text);
+            string stringAfterRemove = StringCouter.RemoveDuplicateWords2(text);
             Assert.Equal(expectedText, stringAfterRemove);
         }
-
-
     }
 }

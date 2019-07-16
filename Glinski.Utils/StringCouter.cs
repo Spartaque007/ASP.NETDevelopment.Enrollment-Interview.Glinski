@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Text;
 
 namespace Gliski.Utils
 {
-
     public class StringCouter
     {
-
-        //Task 3
+        //Task 2
         public static int CountOfVowels(string text)
         {
             Char[] letters = new char[] { 'a', 'e', 'i', 'o', 'u' };
@@ -33,6 +29,8 @@ namespace Gliski.Utils
             return counter;
         }
 
+
+        //Task 3
         public static string[] OrderStringsByLengthBubble(string[] array)
         {
             return BubbleSort(array, new StringLengthComparator());
@@ -136,60 +134,36 @@ namespace Gliski.Utils
         }
 
         //Task 4
-        public static string RemoveDuplicateWords(string text)
+        public static string RemoveDuplicateWords2(string text)
         {
-            if (text.Length < 2)
+            char[] separators = { '.', ',', '!', '?', '-', ':', ';', ' ' };
+            string[] words = text.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+            if (words.Length < 2)
             {
                 return text;
             }
-            List<StringBuilder> textArray = new List<StringBuilder>();
-            int i = 0;
-            while (i < text.Length)
+            int indexOfWords = 0;
+            Dictionary<string, int> lastsWords = new Dictionary<string, int>();
+            StringBuilder outString = new StringBuilder();
+            for (int i = 0; i < text.Length; i++)
             {
-                StringBuilder separators = new StringBuilder();
-                StringBuilder word = new StringBuilder();
-                while (i < text.Length && !IsSeparator(text[i]) )
+                if (text[i] == words[indexOfWords][0])
                 {
-                    word.Append(text[i]);
-                    i++;
-
+                    if (!lastsWords.ContainsKey(words[indexOfWords]))
+                    {
+                        outString.Append(words[indexOfWords]);
+                        lastsWords.Add(words[indexOfWords], 1);
+                    }
+                    i += words[indexOfWords].Length - 1;
+                    indexOfWords++;
                 }
-                if (i < text.Length  && IsSeparator(text[i]))
+                else
                 {
-                    separators.Append(text[i]);
-                    i++;
-                }
-                if(word.Length>0)
-                {
-                    textArray.AddIfNew(word);
-                }
-                if(separators.Length>0)
-                {
-                    textArray.Add(separators);
-                }
-                
-            }
-            return textArray.AllWordsToString() ?? text;
-        }
-
-
-
-        private static bool IsSeparator(char letter)
-        {
-            char[] separators = { '.', ',', '!', '?', '-', ':', ';', ' ' };
-            for (int i = 0; i < separators.Length; i++)
-            {
-                if (letter.Equals(separators[i]))
-                {
-                    return true;
+                    outString.Append(text[i]);
                 }
             }
-            return false;
+            return outString.ToString();
         }
-
-
-
-
     }
 }
 
