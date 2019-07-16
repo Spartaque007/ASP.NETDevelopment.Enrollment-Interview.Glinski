@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Text;
 
 namespace Gliski.Utils
 {
+
     public class StringCouter
     {
+
+        //Task 3
         public static int CountOfVowels(string text)
         {
             Char[] letters = new char[] { 'a', 'e', 'i', 'o', 'u' };
@@ -106,7 +111,7 @@ namespace Gliski.Utils
                     continue;
                 }
 
-                if (comparer.Compare(leftArray[indexLeft], rightArray[indexRight])<0)
+                if (comparer.Compare(leftArray[indexLeft], rightArray[indexRight]) < 0)
                 {
                     mergingArray[i] = leftArray[indexLeft];
                     indexLeft++;
@@ -129,6 +134,62 @@ namespace Gliski.Utils
 
             return mergingArray;
         }
+
+        //Task 4
+        public static string RemoveDuplicateWords(string text)
+        {
+            if (text.Length < 2)
+            {
+                return text;
+            }
+            List<StringBuilder> textArray = new List<StringBuilder>();
+            int i = 0;
+            while (i < text.Length)
+            {
+                StringBuilder separators = new StringBuilder();
+                StringBuilder word = new StringBuilder();
+                while (i < text.Length && !IsSeparator(text[i]) )
+                {
+                    word.Append(text[i]);
+                    i++;
+
+                }
+                if (i < text.Length  && IsSeparator(text[i]))
+                {
+                    separators.Append(text[i]);
+                    i++;
+                }
+                if(word.Length>0)
+                {
+                    textArray.AddIfNew(word);
+                }
+                if(separators.Length>0)
+                {
+                    textArray.Add(separators);
+                }
+                
+            }
+            return textArray.AllWordsToString() ?? text;
+        }
+
+
+
+        private static bool IsSeparator(char letter)
+        {
+            char[] separators = { '.', ',', '!', '?', '-', ':', ';', ' ' };
+            for (int i = 0; i < separators.Length; i++)
+            {
+                if (letter.Equals(separators[i]))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
+
+
     }
 }
 

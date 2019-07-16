@@ -1,13 +1,17 @@
 ﻿using Xunit;
 using Gliski.Utils;
-using System;
-using System.Collections;
+using Xunit.Abstractions;
 
 namespace Glinki.Utils.Tests
 {
     public class StringCounterTest
     {
-        
+        private readonly ITestOutputHelper output;
+        public StringCounterTest(ITestOutputHelper output)
+        {
+            this.output = output;
+        }
+
         [Theory]
         [InlineData("eeee", 4)]
         [InlineData("a e i  v hv hj kll e/?\n", 4)]
@@ -23,8 +27,8 @@ namespace Glinki.Utils.Tests
 
         [Theory]
         [InlineData
-            (new string[] { "666666", "55555", "4444", "333", "22","1" },
-            new string[] { "1", "22","333", "4444", "55555", "666666" })]
+            (new string[] { "666666", "55555", "4444", "333", "22", "1" },
+            new string[] { "1", "22", "333", "4444", "55555", "666666" })]
         [InlineData
             (new string[] { null, null, "4444", "333", "22", "1" },
             new string[] { "1", "22", "333", "4444", null, null })]
@@ -37,7 +41,7 @@ namespace Glinki.Utils.Tests
             Assert.Equal(arrayExpect, arrayAfterSort);
         }
 
-               
+
         [Theory]
         [InlineData
             (new string[] { "666666", "55555", "4444", "333", "22", "1" },
@@ -50,5 +54,23 @@ namespace Glinki.Utils.Tests
             string[] arrayAfterSort = StringCouter.OrderStringsByLengthMerge(arrayIN);
             Assert.Equal(arrayExpect, arrayAfterSort);
         }
+
+        [Theory]
+        [InlineData("aaa aaa bb b uuuu bb", "aaa  bb b uuuu ")]
+        [InlineData("", "")]
+        [InlineData("11 11 11       11 11 11 11", "11            ")]
+        [InlineData("DS::::::: ds DS DS", "DS::::::: ds  ")]
+        [InlineData("12321312312", "12321312312")]
+        [InlineData("   ", "   ")]
+        [InlineData(",.-&?::;!fffffff,.-&?::;!fffffff,.-&?::;!fffffff",
+            ",.-&?::;!fffffff,.-?::;!,.-?::;!")]
+
+        public void RemoveDuplicateWords_Test(string text, string expectedText)
+        {
+            string stringAfterRemove = StringCouter.RemoveDuplicateWords(text);
+            Assert.Equal(expectedText, stringAfterRemove);
+        }
+
+
     }
 }
